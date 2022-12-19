@@ -49,7 +49,7 @@ public class Excercise2 {
         Person secondPerson = new Person("Kate", "Kowalski", 40);
         Person thirdPerson = new Person("Cristiano", "Ronaldo", 40);
         System.out.println(findByLastName(List.of(firstPerson, secondPerson, thirdPerson), "Kowalski"));
-//        System.out.println(findByLastName(List.of(firstPerson, secondPerson, thirdPerson), "Ronaldo"));
+        System.out.println(findByLastName(List.of(firstPerson, secondPerson, thirdPerson), "Ronaldo"));
     }
 
     private static List<Person> findByLastName(List<Person> people, String lastName) {
