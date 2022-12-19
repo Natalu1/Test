@@ -4,6 +4,7 @@ import com.company.ex2.Person;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Excercise3 {
 
@@ -12,6 +13,7 @@ public class Excercise3 {
         ex_3_1();
         System.out.println("Oldest owner of the animal - " + ex_3_2());
         System.out.println(ex_3_3());
+        System.out.println(ex_3_4());
     }
 
     //Create one instance of Bird and two instances of Cat
@@ -30,11 +32,11 @@ public class Excercise3 {
     //Write method returning Set of Person - it should be the oldest owner of the animal
     private static Set<Person> ex_3_2() {
         List<Animal> animals = Arrays.asList(
-                new Bird("Sparrow", Set.of(new Person("Adam", "CXZ", 42)), 50),
+                new Bird("Sparrow", Set.of(new Person("Adam", "CXZ", 40)), 50),
                 new Cat("Persik",
                         Set.of(new Person("Dik", "HGF", 23),
                                 new Person("Den", " kjhgfd", 42))),
-                new Cat("Cat", Set.of(new Person("Ewa", "Kowalski", 42))));
+                new Cat("Cat", Set.of(new Person("Ewa", "Kowalski", 41))));
         return animals.stream()
                 .map(Animal::getOwners)
                 .map(people -> getOldOfPerson(people))
@@ -70,7 +72,6 @@ public class Excercise3 {
                 .map(Animal::getOwners)
                 .map(people -> getNamesOrUnknown(people))
                 .collect(Collectors.toList());
-
     }
 
     private static List<String> getNamesOrUnknown(Set<Person> people) {
@@ -85,19 +86,29 @@ public class Excercise3 {
     //Create one instance of Bird and two instances of Cat together with owners
     //One of animals should be homeless (without owners)
     //Write method returning Set of objects - AnimalId - it should contain Animal name and the oldest person fullName
-    private static void ex_3_4() {
+    private static Set<AnimalId> ex_3_4() {
         List<Animal> animals = Arrays.asList(
                 new Bird("Sparrow", Set.of(new Person("Adam", "CXZ", 25)), 50),
                 new Cat("Persik", Set.of(new Person("Dik", "HGF", 42),
                         new Person("Max", "HGF", 23))),
                 new Cat("Cat", Set.of()));
-//        animals.stream()
-//                .map(animal -> new AnimalId(animal.getName(),))
-
+        Set<AnimalId> animalIdSet = animals.stream()
+                .map(animal -> new AnimalId(animal.getName(),
+                        getFullName(getOldOfPersonOptional(animal.getOwners()))))
+                .collect(Collectors.toSet());
+        return animalIdSet;
     }
 
-
-
+    private static Optional<Person> getOldOfPersonOptional(Set<Person> peoples) {
+        return peoples.stream()
+                .max(Comparator.comparingInt(Person::getAge));
+    }
+    private static String getFullName(Optional<Person> person){
+        if (person.isEmpty()){
+            return "UNKNOWN";
+        }
+        return person.get().getFirstName() + " " + person.get().getLastName();
+    }
     //DLA CHĘTNYCH!!!
     //Create one instance of Bird and two instances of Cat together with owners
     //One of animals should be homeless (without owners)

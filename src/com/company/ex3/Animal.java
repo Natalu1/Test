@@ -2,6 +2,7 @@ package com.company.ex3;
 
 import com.company.ex2.Person;
 
+import java.util.Objects;
 import java.util.Set;
 
 public abstract class Animal {
@@ -21,5 +22,8 @@ public abstract class Animal {
     public String getName() {
         return name;
     }
+
+
+
 
 }

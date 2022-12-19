@@ -9,4 +9,9 @@ public class AnimalId {
         this.ownerFullName = ownerFullName;
     }
 
+    @Override
+    public String toString() {
+        return
+                 animalName + " - oldest owner: " + ownerFullName ;
+    }
 }

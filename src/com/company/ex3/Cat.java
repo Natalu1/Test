@@ -22,4 +22,5 @@ public class Cat extends Animal {
     void giveVoice() {
         System.out.println(super.getName() + " - Miau");
     }
+
 }

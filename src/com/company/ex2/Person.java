@@ -1,8 +1,6 @@
 package com.company.ex2;
 
-import java.util.Comparator;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Person {
     private String firstName;
@@ -46,9 +44,7 @@ public class Person {
         this.age = age;
         this.phoneNumber = phoneNumber;
     }
-    public String fullName(){
-        return firstName+ " " + lastName;
-    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
