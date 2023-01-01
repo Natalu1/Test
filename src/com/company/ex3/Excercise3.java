@@ -1,6 +1,7 @@
 package com.company.ex3;
 
 import com.company.ex2.Person;
+import util.Utils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -14,6 +15,9 @@ public class Excercise3 {
         System.out.println("Oldest owner of the animal - " + ex_3_2());
         System.out.println(ex_3_3());
         System.out.println(ex_3_4());
+        System.out.println(ex_3_5());
+        Utils<AnimalId> utils = new Utils<>();
+        utils.printCollectionInColumn(ex_3_5());
     }
 
     //Create one instance of Bird and two instances of Cat
@@ -133,6 +137,25 @@ public class Excercise3 {
     // Cat(7)
     // etc...
 
-    private static void ex_3_5() {
+    private static List<AnimalId> ex_3_5() {
+        List<Animal> animals = Arrays.asList(
+                new Bird("Sparrow1", Set.of(new Person("Adam", "CXZ", 25),
+                        new Person("Adam", "CXZ", 23)), 1),
+                new Bird("Sparrow2", Set.of(new Person("Adam", "CXZ", 12)), 2),
+                new Bird("Sparrow4", Set.of(new Person("Adam", "CXZ", 15)), 4),
+                new Bird("Sparrow5", Set.of(new Person("Adam", "CXZ", 20)), 5),
+                new Cat("Persik3", Set.of(new Person("Dik", "HGF", 42),
+                        new Person("Max", "HGF", 23)), 3),
+                new Cat("Cat5", Set.of(),5),
+                new Cat("Persik7", Set.of(new Person("Dik", "HGF", 42)),7),
+                new Cat("Persik13", Set.of(new Person("Dik", "HGF", 42)),13));
+
+        return animals.stream().sorted(Comparator.comparingInt(Animal::getSortValue))
+                .map(animal -> new AnimalId(animal.getName(),
+                        getFullName(getOldOfPersonOptional(animal.getOwners()))))
+                .collect(Collectors.toList());
+
     }
+
+
 }

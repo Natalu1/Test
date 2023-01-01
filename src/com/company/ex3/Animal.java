@@ -9,6 +9,7 @@ public abstract class Animal {
     private String name;
     private Set<Person> owners;
     abstract void giveVoice();
+    abstract int getSortValue();
 
     public Animal(String name, Set<Person> owners) {
         this.name = name;

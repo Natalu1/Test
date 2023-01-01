@@ -4,6 +4,7 @@ import com.company.ex2.Person;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Cat extends Animal {
 
@@ -12,7 +13,10 @@ public class Cat extends Animal {
     public Cat(String name, Set<Person> owners) {
         super(name, owners);
     }
-
+    public Cat(String name, Set<Person> owners, int tailLength) {
+        super(name, owners);
+        this.tailLength = tailLength;
+    }
     public Cat(String name, int tailLength) {
         super(name, Collections.emptySet());
         this.tailLength = tailLength;
@@ -22,5 +26,11 @@ public class Cat extends Animal {
     void giveVoice() {
         System.out.println(super.getName() + " - Miau");
     }
+
+    @Override
+    int getSortValue() {
+        return tailLength;
+    }
+
 
 }
